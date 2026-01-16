@@ -83,8 +83,8 @@ function App() {
 
             <div className="grid md:grid-cols-3 gap-8">
               <div className="group bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div className="h-64 bg-gradient-to-br from-amber-200 to-orange-300 flex items-center justify-center">
-                  <div className="text-8xl">🍗</div>
+                <div className="h-64 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&q=80" alt="Chicken Bao" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Chicken Bao</h3>
@@ -105,8 +105,8 @@ function App() {
               </div>
 
               <div className="group bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div className="h-64 bg-gradient-to-br from-red-200 to-pink-300 flex items-center justify-center">
-                  <div className="text-8xl">🥩</div>
+                <div className="h-64 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=80" alt="Pork Bao" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Meat Bao</h3>
@@ -127,8 +127,8 @@ function App() {
               </div>
 
               <div className="group bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div className="h-64 bg-gradient-to-br from-green-200 to-emerald-300 flex items-center justify-center">
-                  <div className="text-8xl">🥬</div>
+                <div className="h-64 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=800&q=80" alt="Tofu Bao" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Tofu Bao</h3>
@@ -164,7 +164,12 @@ function App() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
+              <div className="space-y-6 order-2 md:order-1">
+                <div className="mb-8">
+                  <img src="/antonio.png" alt="Chef Antonio" className="w-48 h-48 rounded-full object-cover mx-auto md:mx-0 shadow-xl border-4 border-white" />
+                  <p className="text-center md:text-left mt-4 text-lg font-semibold text-gray-900">Chef Antonio</p>
+                  <p className="text-center md:text-left text-gray-600">Master of Asian Cuisine</p>
+                </div>
                 <div className="flex items-start space-x-4">
                   <div className="bg-red-100 p-3 rounded-full">
                     <Users className="h-6 w-6 text-red-600" />
@@ -202,7 +207,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-xl p-8">
+              <div className="bg-white rounded-2xl shadow-xl p-8 order-1 md:order-2">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">What's Included</h3>
                 <ul className="space-y-4">
                   <li className="flex items-center space-x-3">

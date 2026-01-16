@@ -1,8 +1,12 @@
 import { useState } from 'react'
-import { ChefHat, Phone, Mail, Instagram, Menu, X, Sparkles, Clock, Users, Star } from 'lucide-react'
+import { ChefHat, Phone, Mail, Instagram, Menu, X, Sparkles, Clock, Users, Star, Languages } from 'lucide-react'
+import { translations } from './translations'
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [language, setLanguage] = useState('en')
+  
+  const t = translations[language]
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id)
@@ -20,26 +24,37 @@ function App() {
               <span className="text-2xl font-bold text-gray-900">Antonio's Baos</span>
             </div>
             
-            <div className="hidden md:flex space-x-8">
-              <button onClick={() => scrollToSection('menu')} className="text-gray-700 hover:text-red-600 transition">Menu</button>
-              <button onClick={() => scrollToSection('chef')} className="text-gray-700 hover:text-red-600 transition">Private Chef</button>
-              <button onClick={() => scrollToSection('contact')} className="text-gray-700 hover:text-red-600 transition">Contact</button>
-            </div>
+            <div className="flex items-center space-x-4">
+              <div className="hidden md:flex space-x-8">
+                <button onClick={() => scrollToSection('menu')} className="text-gray-700 hover:text-red-600 transition">{t.nav.menu}</button>
+                <button onClick={() => scrollToSection('chef')} className="text-gray-700 hover:text-red-600 transition">{t.nav.chef}</button>
+                <button onClick={() => scrollToSection('contact')} className="text-gray-700 hover:text-red-600 transition">{t.nav.contact}</button>
+              </div>
+              
+              <button
+                onClick={() => setLanguage(language === 'en' ? 'pt' : 'en')}
+                className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-red-50 hover:bg-red-100 transition text-red-600 font-medium"
+                title={language === 'en' ? 'Switch to Portuguese' : 'Mudar para Inglês'}
+              >
+                <Languages className="h-5 w-5" />
+                <span className="text-sm">{language === 'en' ? 'PT' : 'EN'}</span>
+              </button>
 
-            <button 
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+              <button 
+                className="md:hidden"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
           </div>
 
           {mobileMenuOpen && (
             <div className="md:hidden pb-4">
               <div className="flex flex-col space-y-3">
-                <button onClick={() => scrollToSection('menu')} className="text-gray-700 hover:text-red-600 transition text-left">Menu</button>
-                <button onClick={() => scrollToSection('chef')} className="text-gray-700 hover:text-red-600 transition text-left">Private Chef</button>
-                <button onClick={() => scrollToSection('contact')} className="text-gray-700 hover:text-red-600 transition text-left">Contact</button>
+                <button onClick={() => scrollToSection('menu')} className="text-gray-700 hover:text-red-600 transition text-left">{t.nav.menu}</button>
+                <button onClick={() => scrollToSection('chef')} className="text-gray-700 hover:text-red-600 transition text-left">{t.nav.chef}</button>
+                <button onClick={() => scrollToSection('contact')} className="text-gray-700 hover:text-red-600 transition text-left">{t.nav.contact}</button>
               </div>
             </div>
           )}
@@ -52,23 +67,23 @@ function App() {
           
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-              Authentic <span className="text-red-600">Asian Baos</span>
+              {t.hero.title} <span className="text-red-600">{t.hero.titleHighlight}</span>
             </h1>
             <p className="text-xl sm:text-2xl text-gray-700 mb-8 max-w-2xl mx-auto">
-              Handcrafted steamed buns filled with love and flavor. Experience the art of traditional bao-making.
+              {t.hero.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={() => scrollToSection('menu')}
                 className="bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transition shadow-lg hover:shadow-xl"
               >
-                View Menu
+                {t.hero.viewMenu}
               </button>
               <button 
                 onClick={() => scrollToSection('chef')}
                 className="bg-white text-red-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-50 transition shadow-lg border-2 border-red-600"
               >
-                Book Private Chef
+                {t.hero.bookChef}
               </button>
             </div>
           </div>
@@ -77,8 +92,8 @@ function App() {
         <section id="menu" className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Our Signature Baos</h2>
-              <p className="text-xl text-gray-600">Fluffy steamed buns with incredible fillings</p>
+              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">{t.menu.title}</h2>
+              <p className="text-xl text-gray-600">{t.menu.subtitle}</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -87,9 +102,9 @@ function App() {
                   <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&q=80" alt="Chicken Bao" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Chicken Bao</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{t.menu.chicken.name}</h3>
                   <p className="text-gray-700 mb-4">
-                    Tender marinated chicken with crispy vegetables, hoisin sauce, and fresh herbs in a pillowy soft bun.
+                    {t.menu.chicken.description}
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-red-600">$8.50</span>
@@ -109,9 +124,9 @@ function App() {
                   <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=80" alt="Pork Bao" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Meat Bao</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{t.menu.meat.name}</h3>
                   <p className="text-gray-700 mb-4">
-                    Slow-braised pork belly with pickled vegetables, scallions, and our secret glaze. A customer favorite!
+                    {t.menu.meat.description}
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-red-600">$9.50</span>
@@ -131,9 +146,9 @@ function App() {
                   <img src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=800&q=80" alt="Tofu Bao" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Tofu Bao</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{t.menu.tofu.name}</h3>
                   <p className="text-gray-700 mb-4">
-                    Crispy tofu with Asian slaw, sesame seeds, and spicy mayo. Perfect for vegetarians and vegans alike!
+                    {t.menu.tofu.description}
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-red-600">$7.50</span>
@@ -157,9 +172,9 @@ function App() {
               <div className="flex justify-center mb-4">
                 <Sparkles className="h-12 w-12 text-red-600" />
               </div>
-              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Private Chef Services</h2>
+              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">{t.chef.title}</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Bring the authentic taste of Asian cuisine to your home. Perfect for dinner parties, special occasions, or intimate gatherings.
+                {t.chef.subtitle}
               </p>
             </div>
 
@@ -167,17 +182,17 @@ function App() {
               <div className="space-y-6 order-2 md:order-1">
                 <div className="mb-8">
                   <img src="./antonio.png" alt="Chef Antonio" className="w-48 h-48 rounded-full object-cover mx-auto md:mx-0 shadow-xl border-4 border-white" />
-                  <p className="text-center md:text-left mt-4 text-lg font-semibold text-gray-900">Chef Antonio</p>
-                  <p className="text-center md:text-left text-gray-600">Master of Asian Cuisine</p>
+                  <p className="text-center md:text-left mt-4 text-lg font-semibold text-gray-900">{t.chef.chefName}</p>
+                  <p className="text-center md:text-left text-gray-600">{t.chef.chefTitle}</p>
                 </div>
                 <div className="flex items-start space-x-4">
                   <div className="bg-red-100 p-3 rounded-full">
                     <Users className="h-6 w-6 text-red-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Customized Menus</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{t.chef.customized.title}</h3>
                     <p className="text-gray-700">
-                      Tailored menus designed around your preferences, dietary needs, and occasion. From baos to full multi-course Asian feasts.
+                      {t.chef.customized.description}
                     </p>
                   </div>
                 </div>
@@ -187,9 +202,9 @@ function App() {
                     <Clock className="h-6 w-6 text-red-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Flexible Scheduling</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{t.chef.flexible.title}</h3>
                     <p className="text-gray-700">
-                      Available for lunch, dinner, or weekend events. Book Antonio for intimate dinners or parties up to 20 guests.
+                      {t.chef.flexible.description}
                     </p>
                   </div>
                 </div>
@@ -199,42 +214,28 @@ function App() {
                     <ChefHat className="h-6 w-6 text-red-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Professional Experience</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{t.chef.experience.title}</h3>
                     <p className="text-gray-700">
-                      Years of experience in Asian cuisine with a passion for authentic flavors and modern presentation techniques.
+                      {t.chef.experience.description}
                     </p>
                   </div>
                 </div>
               </div>
 
               <div className="bg-white rounded-2xl shadow-xl p-8 order-1 md:order-2">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">What's Included</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">{t.chef.included.title}</h3>
                 <ul className="space-y-4">
-                  <li className="flex items-center space-x-3">
-                    <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-                    <span className="text-gray-700">Menu planning consultation</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-                    <span className="text-gray-700">Fresh ingredient sourcing</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-                    <span className="text-gray-700">On-site preparation and cooking</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-                    <span className="text-gray-700">Beautiful plating and presentation</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-                    <span className="text-gray-700">Kitchen cleanup</span>
-                  </li>
+                  {t.chef.included.items.map((item, index) => (
+                    <li key={index} className="flex items-center space-x-3">
+                      <div className="h-2 w-2 bg-red-600 rounded-full"></div>
+                      <span className="text-gray-700">{item}</span>
+                    </li>
+                  ))}
                 </ul>
                 <div className="mt-8 p-6 bg-red-50 rounded-xl">
-                  <p className="text-sm text-gray-600 mb-2">Starting from</p>
+                  <p className="text-sm text-gray-600 mb-2">{t.chef.included.startingFrom}</p>
                   <p className="text-4xl font-bold text-red-600 mb-4">$350</p>
-                  <p className="text-sm text-gray-600">per event (4-6 guests)</p>
+                  <p className="text-sm text-gray-600">{t.chef.included.perEvent}</p>
                 </div>
               </div>
             </div>
@@ -244,20 +245,20 @@ function App() {
         <section id="contact" className="py-20 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-              <p className="text-xl text-gray-600">Ready to order or book a private chef experience?</p>
+              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">{t.contact.title}</h2>
+              <p className="text-xl text-gray-600">{t.contact.subtitle}</p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-8 shadow-lg">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">{t.contact.info}</h3>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-4">
                     <div className="bg-red-600 p-3 rounded-full">
                       <Phone className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-600">Phone</p>
+                      <p className="text-sm text-gray-600">{t.contact.phone}</p>
                       <p className="text-lg font-semibold text-gray-900">(555) 123-4567</p>
                     </div>
                   </div>
@@ -266,7 +267,7 @@ function App() {
                       <Mail className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-600">Email</p>
+                      <p className="text-sm text-gray-600">{t.contact.email}</p>
                       <p className="text-lg font-semibold text-gray-900">antonio@baos.com</p>
                     </div>
                   </div>
@@ -283,37 +284,37 @@ function App() {
               </div>
 
               <div className="bg-gray-50 rounded-2xl p-8 shadow-lg">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Quick Inquiry</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">{t.contact.inquiry}</h3>
                 <form className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t.contact.form.name}</label>
                     <input 
                       type="text" 
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition"
-                      placeholder="Your name"
+                      placeholder={t.contact.form.namePlaceholder}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t.contact.form.email}</label>
                     <input 
                       type="email" 
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition"
-                      placeholder="your@email.com"
+                      placeholder={t.contact.form.emailPlaceholder}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t.contact.form.message}</label>
                     <textarea 
                       rows="4" 
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition resize-none"
-                      placeholder="Tell us about your order or event..."
+                      placeholder={t.contact.form.messagePlaceholder}
                     ></textarea>
                   </div>
                   <button 
                     type="submit" 
                     className="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition shadow-lg hover:shadow-xl"
                   >
-                    Send Message
+                    {t.contact.form.send}
                   </button>
                 </form>
               </div>
@@ -330,8 +331,8 @@ function App() {
               <span className="text-2xl font-bold">Antonio's Baos</span>
             </div>
             <div className="text-center md:text-right">
-              <p className="text-gray-400">© 2026 Antonio's Baos. All rights reserved.</p>
-              <p className="text-gray-400 mt-1">Crafted with ❤️ and authentic flavors</p>
+              <p className="text-gray-400">© 2026 Antonio's Baos. {t.footer.rights}</p>
+              <p className="text-gray-400 mt-1">{t.footer.crafted}</p>
             </div>
           </div>
         </div>

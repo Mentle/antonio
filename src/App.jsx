@@ -166,7 +166,7 @@ function App() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="space-y-6 order-2 md:order-1">
                 <div className="mb-8">
-                  <img src="/antonio.png" alt="Chef Antonio" className="w-48 h-48 rounded-full object-cover mx-auto md:mx-0 shadow-xl border-4 border-white" />
+                  <img src="./antonio.png" alt="Chef Antonio" className="w-48 h-48 rounded-full object-cover mx-auto md:mx-0 shadow-xl border-4 border-white" />
                   <p className="text-center md:text-left mt-4 text-lg font-semibold text-gray-900">Chef Antonio</p>
                   <p className="text-center md:text-left text-gray-600">Master of Asian Cuisine</p>
                 </div>
